@@ -4,6 +4,7 @@ MAINTAINER Martin Peters <martin@freakybytes.net>
 # SSH, Public Key and Skype are already setup in skype-on-docker
 
 # Install pulseaudio (Audio Server) for i386
+RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y libpulse0:i386 pulseaudio:i386
 #RUN apt-get install -y dbus libdbus-1-3
 
