@@ -18,7 +18,7 @@ RUN useradd -m -d /home/docker -s /bin/bash docker && \
 #  openssh-server as we connect to the container via SSH
 #  wget to download skype
 #  xauth for x forwarding
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
         openssh-server \
         wget \
         xauth \
