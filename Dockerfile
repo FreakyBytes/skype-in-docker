@@ -21,6 +21,7 @@ RUN apt-get install -y --no-install-recommends \
         openssh-server \
         wget ca-certificates \
         xauth \
+	xpra \
 	libpulse0 pulseaudio
 
 # Install Skype
