@@ -33,13 +33,15 @@ RUN apt-get install -fy && rm /tmp/skypeforlinux.deb
 RUN echo "X11Forwarding yes" >> /etc/ssh/ssh_config && \
     echo "X11UseLocalhost no \nPermitUserEnvironment yes" >> /etc/ssh/sshd_config
 
-COPY authorized_keys /root/.ssh/
-COPY authorized_keys /home/docker/.ssh/
+# env var containing authorized ssh keys
+ENV SSHD_AUTHORIZED_KEYS=""
 
 # set pulse config vars on ssh login
 RUN echo '\
 PULSE_SERVER=tcp:locahost:4713\n \
 PULSE_LATENCY_MSEC=60' > /home/docker/.ssh/environment
+
+COPY sshd-entrypoint.sh /sshd-entrypoint.sh
 
 # add config entry to pulseaudio config
 RUN echo 'default-server=localhost:4713' >> /etc/pulse/client.conf
@@ -49,4 +51,4 @@ EXPOSE 22
 
 # start SSHd
 # SSH, Public Key and Skype are already setup in skype-on-docker
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/sshd-entrypoint.sh"]

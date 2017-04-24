@@ -8,4 +8,4 @@ then
 fi
 
 # start sshd
-/usr/bin/sshd -D
+/usr/sbin/sshd -D
