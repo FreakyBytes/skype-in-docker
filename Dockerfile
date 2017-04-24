@@ -30,18 +30,19 @@ RUN dpkg -i /tmp/skypeforlinux.deb || true
 RUN apt-get install -fy && rm /tmp/skypeforlinux.deb
 
 # Configure SSH stuff
-RUN echo X11Forwarding yes >> /etc/ssh/ssh_config
+RUN echo "X11Forwarding yes" >> /etc/ssh/ssh_config && \
+    echo "X11UseLocalhost no \nPermitUserEnvironment yes" >> /etc/ssh/sshd_config
+
 COPY authorized_keys /root/.ssh/
 COPY authorized_keys /home/docker/.ssh/
 
 # set pulse config vars on ssh login
-RUN echo '#!/bin/sh \
-export PULSE_SERVER="tcp:locahost:64713"\n \
-export PULSE_LATENCY_MSEC=60' > /home/docker/.ssh/rc && \
-chmod +x /home/docker/.ssh/rc
+RUN echo '\
+PULSE_SERVER=tcp:locahost:4713\n \
+PULSE_LATENCY_MSEC=60' > /home/docker/.ssh/environment
 
 # add config entry to pulseaudio config
-RUN echo 'default-server=localhost:64713' >> /etc/pulse/client.conf
+RUN echo 'default-server=localhost:4713' >> /etc/pulse/client.conf
 
 # Expose SSH port
 EXPOSE 22
