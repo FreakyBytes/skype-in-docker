@@ -4,7 +4,7 @@
 if [ "$SSHD_AUTHORIZED_KEYS" ]
 then
 	echo $SSHD_AUTHORIZED_KEYS > /root/.ssh/authorized_keys
-	echo $SSHD_AUTHORIZED_KEYS > /home/docker/authorized_keys
+	echo $SSHD_AUTHORIZED_KEYS > /home/docker/.ssh/authorized_keys
 fi
 
 # start sshd
