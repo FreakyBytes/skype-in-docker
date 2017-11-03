@@ -9,7 +9,7 @@ function container-stop {
 }
 
 # create keys dir
-mkdir keys || true
+[ -d keys ] || mkdir keys
 
 if [ ! -f keys/${SSH_KEY_NAME} ]
 then
