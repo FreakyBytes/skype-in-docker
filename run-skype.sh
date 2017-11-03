@@ -22,5 +22,8 @@ docker run -d --rm -p 127.0.0.1:55757:22 --privileged -v /dev/video0:/dev/video0
 
 # sleep a while aka. wait until container is up and running
 sleep 1
-ssh -X -p 55757 -R 4713:localhost:4713 -i keys/${SSH_KEY_NAME} docker@127.0.0.1
+ssh -X -p 55757 -i keys/${SSH_KEY_NAME} docker@127.0.0.1
+
+# clean up
+ssh-keygen -f "/home/martin/.ssh/known_hosts" -R "[127.0.0.1]:55757"
 container-stop

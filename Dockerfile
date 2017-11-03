@@ -39,7 +39,6 @@ ENV SSHD_AUTHORIZED_KEYS=""
 
 # set pulse config vars on ssh login
 RUN echo '\
-PULSE_SERVER=tcp:locahost:4713\n \
 PULSE_LATENCY_MSEC=60' > /home/docker/.ssh/environment
 
 COPY sshd-entrypoint.sh /sshd-entrypoint.sh
