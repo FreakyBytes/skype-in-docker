@@ -24,8 +24,9 @@ RUN apt-get install -y --no-install-recommends \
 	libpulse0 pulseaudio
 
 # Install Skype
+# https://go.skype.com/skypeforlinux-64.deb
 RUN wget https://go.skype.com/skypeforlinux-64.deb -O /tmp/skypeforlinux.deb && \
-    echo 'b412a1aa8c25d624e8778c81cc276fe61015f548015d459f92020b0b7a3068a3  /tmp/skypeforlinux.deb' | sha256sum -c
+    echo 'd09152d1eabd57d75346eda8ab91ddb8c48d275a292ae5a2f18e179ccadc2bb7  /tmp/skypeforlinux.deb' | sha256sum -c
 RUN dpkg -i /tmp/skypeforlinux.deb || true
 RUN apt-get install -fy && rm /tmp/skypeforlinux.deb
 
