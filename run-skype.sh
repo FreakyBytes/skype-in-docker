@@ -1,11 +1,12 @@
 #!/bin/bash
 
+SSH_KEY_NAME="skype-container"
+CONTAINER_NAME="skype-container"
+
 # function to stop/remove container
 function container-stop {
-	docker stop skype-container
+	docker stop $CONTAINER_NAME
 }
-
-SSH_KEY_NAME="skype-container"
 
 # create keys dir
 mkdir keys || true
@@ -17,7 +18,7 @@ then
 fi
 
 # start container
-docker run -d --rm -p 127.0.0.1:55757:22 --privileged -v /dev/video0:/dev/video0 -e "SSHD_AUTHORIZED_KEYS=$(cat keys/${SSH_KEY_NAME}.pub)" --name skype-container pulse-skype:latest || exit 1
+docker run -d --rm -p 127.0.0.1:55757:22 --privileged -v /dev/video0:/dev/video0 -e "SSHD_AUTHORIZED_KEYS=$(cat keys/${SSH_KEY_NAME}.pub)" --name $CONTAINER_NAME pulse-skype:latest || exit 1
 
 # sleep a while aka. wait until container is up and running
 sleep 1
